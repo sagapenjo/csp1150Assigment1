@@ -18,6 +18,7 @@ def ask_q(max_num,numofquestion):
     i=0#new variable to control the number of displayed questions
     total_time = 0 #So it can be used in case of value error
     correct=0
+    question_log = []
     while i<numofquestion-1:
         try:
             start_time = t.time()#start countiung time
@@ -37,15 +38,31 @@ def ask_q(max_num,numofquestion):
 Correct answer! You took {round(elapsed_time,3)} seconds, Points awarded : {point}""")
                  
             else:
-                i+= 1              
+                i+= 1 
+                point=0            
                 print(f"Incorrect! No points awarded ")
+            question_log.append({
+                "question_number":i+1,
+                "is_correct": user_ans == correct_ans,
+                "time_taken": elapsed_time,
+                "points_awarded": point
+            })
 
         except ValueError:
             end_time= t.time()
             elapsed_time = int(end_time - start_time)
             total_time+=elapsed_time
             i+=1
+            question_log.append({
+                "question_number":i+1,
+                "is_correct": "Invalid",
+                "time_taken": elapsed_time,
+                "points_awarded": 0
+            })
             print("Enter a number!! No points awarded")
+
+       
+
           
     print("""Final boss!!!!
 Challenge question!: Correct answer grants 20 points!!!""")
@@ -67,15 +84,35 @@ Challenge question!: Correct answer grants 20 points!!!""")
 Correct answer! You took {round(elapsed_time,3)} seconds, Points awarded : 20""")
                  
             else:
-                i+= 1              
-                print(f"Incorrect! No points awarded ")
-
+                i+= 1  
+                point=0            
+                print(f"Incorrect! No points awarded ")            
+            question_log.append({
+                "question_number": i+1,
+                "is_correct": user_ans == correct_ans,
+                "time_taken": elapsed_time,
+                "points_awarded": 20
+            })
+            
     except ValueError:        
         i+=1
-        print("Enter a number!! No points awarded")                
+        print("Enter a number!! No points awarded") 
+        question_log.append({
+                "question_number":  i+1,
+                "is_correct": False,
+                "time_taken": elapsed_time,
+                "points_awarded": 0
+            })
+
         
     average_time = (elapsed_time/numofquestion)    
-            
+    print("\n----------Questions Breakdown----------")
+    print(f"{'Question number':<20}{'Correct':<20}{'Time taken(s)':<20}{"Points":<20}")
+    print("-"*80)
+    for info in question_log:
+        print(f"{info['question_number']:<20}{"Yes" if info ['is_correct']else 'No':<20}{info['time_taken']:<20}{info['points_awarded']:<20}") 
+
+    
     print(f"""Quiz over! 
 Your total score was:  {score}
 You answered {(correct/numofquestion)*100}% of the questions correctly
