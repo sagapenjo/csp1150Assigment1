@@ -33,7 +33,7 @@ def ask_q(max_num,numofquestion):
                 i+= 1                                             
                 point = int(10-elapsed_time)
                 score+= point
-                print(f"""Question no.{i} :
+                print(f"""Question no: {i}
 Correct answer! You took {round(elapsed_time,3)} seconds, Points awarded : {point}""")
                  
             else:
@@ -63,7 +63,7 @@ Challenge question!: Correct answer grants 20 points!!!""")
                 i+= 1                                             
                 point = 20
                 score+= point
-                print(f"""Question no.{i} :
+                print(f"""Question no: {i}
 Correct answer! You took {round(elapsed_time,3)} seconds, Points awarded : 20""")
                  
             else:
