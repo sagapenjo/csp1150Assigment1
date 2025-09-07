@@ -106,17 +106,17 @@ Correct answer! You took {round(elapsed_time,3)} seconds, Points awarded : 20"""
 
         
     average_time = (elapsed_time/numofquestion)    
-    print("\n----------Questions Breakdown----------")
+    print("\n----------Questions Breakdown----------")#\n for next line
     print(f"{'Question number':<20}{'Correct':<20}{'Time taken(s)':<20}{"Points":<20}")
     print("-"*80)
     for info in question_log:
         print(f"{info['question_number']:<20}{"Yes" if info ['is_correct']else 'No':<20}{info['time_taken']:<20}{info['points_awarded']:<20}") 
 
     
-    print(f"""Quiz over! 
-Your total score was:  {score}
-You answered {(correct/numofquestion)*100}% of the questions correctly
-You average response time was: {average_time}s""")#only print after i=numofquestions(Multiline strings are very cool)
+    print(f"""\nQuiz over! 
+                                       Your total score was:  {score}
+                         You answered {(correct/numofquestion)*100}% of the questions correctly
+                                You average response time was: {average_time}s""")#only print after i=numofquestions(Multiline strings are very cool)
 
 print("--------------------------------------Welcome to the (not so) ULTIMATE math quiz--------------------------------------")
 
@@ -138,6 +138,11 @@ while True:
         elif choice == "3":
             ask_q(50,15)
             break
+        else:
+            print("""Choose a valid difficulty
+                  1-->Easy
+                  2-->Medium
+                  3-->Hard""")
     except ValueError:
-        ("Choose a Valid difficulty ")
+        print("Choose a Valid difficulty ")
         
