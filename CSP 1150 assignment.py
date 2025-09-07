@@ -2,14 +2,14 @@ import time as t #importing as t just makes it easier as i can wrtite t.start ra
 import random
 
 #make question
-def create_q(max_num,numofquestion):
+def create_q(min_num,max_num):
     while True:
         operations= ("+","-")#write as string and use eval() later
-        a=random.randint(1,max_num)
-        b=random.randint(1,max_num)
+        a=random.randint(int(min_num),int(max_num))
+        b=random.randint(int(min_num),int(max_num))
         op=random.choice(operations)
     #store the question in a variable
-        result =(f"{a}{op}{b} ")
+        result =(f"{a}{op}{b}")
         return result #no brackets as im not calling a function
 
 def ask_q(max_num,numofquestion):
@@ -18,12 +18,12 @@ def ask_q(max_num,numofquestion):
     i=0#new variable to control the number of displayed questions
     total_time = 0 #So it can be used in case of value error
     correct=0
-    while i<numofquestion:
+    while i<numofquestion-1:
         try:
             start_time = t.time()#start countiung time
-            question=create_q(max_num//2, numofquestion)
+            question=create_q(max_num/2,max_num)
             correct_ans = eval(question) #eval evaluates the operation intially counted as string
-            user_ans = int(input(question))
+            user_ans = int(input(question + "= "))
             end_time= t.time()#end counting time
             elapsed_time = int(end_time - start_time)#calculate elapsed time
             total_time+=elapsed_time
@@ -33,27 +33,27 @@ def ask_q(max_num,numofquestion):
                 i+= 1                                             
                 point = int(10-elapsed_time)
                 score+= point
-                print(f"Correct answer! You took {round(elapsed_time,3)} seconds, Points awarded : {point}")
+                print(f"""Question no.{i} :
+Correct answer! You took {round(elapsed_time,3)} seconds, Points awarded : {point}""")
                  
             else:
                 i+= 1              
-                print(f"Incorrect! No points awarded ")                
-        
+                print(f"Incorrect! No points awarded ")
+
         except ValueError:
             end_time= t.time()
             elapsed_time = int(end_time - start_time)
             total_time+=elapsed_time
             i+=1
             print("Enter a number!! No points awarded")
-        average_time = (elapsed_time/numofquestion)
-    
-        try:
-            print("""Final boss!!!!
+          
+    print("""Final boss!!!!
 Challenge question!: Correct answer grants 20 points!!!""")
+    try:
             start_time = t.time()#start countiung time
-            challenge_question=create_q(max_num*2)
+            challenge_question=create_q(max_num,max_num*2)
             correct_ans = eval(challenge_question) #eval evaluates the operation intially counted as string
-            user_ans = int(input(challenge_question))
+            user_ans = int(input(challenge_question +"= "))
             end_time= t.time()#end counting time
             elapsed_time = int(end_time - start_time)#calculate elapsed time
             total_time+=elapsed_time
@@ -61,13 +61,20 @@ Challenge question!: Correct answer grants 20 points!!!""")
             if user_ans == correct_ans:
                 correct+=1
                 i+= 1                                             
-                point = int(10-elapsed_time)
+                point = 20
                 score+= point
-                print(f"Correct answer! You took {round(elapsed_time,3)} seconds, Points awarded : {point}")
+                print(f"""Question no.{i} :
+Correct answer! You took {round(elapsed_time,3)} seconds, Points awarded : 20""")
                  
             else:
                 i+= 1              
                 print(f"Incorrect! No points awarded ")
+
+    except ValueError:        
+        i+=1
+        print("Enter a number!! No points awarded")                
+        
+    average_time = (elapsed_time/numofquestion)    
             
     print(f"""Quiz over! 
 Your total score was:  {score}
@@ -83,16 +90,16 @@ while True:
 1)Easy 
 2)Medium 
 3)Hard 
--->""").lower()
+-->""")
     try:
         if choice == "1":
-            ask_q(10,4)
+            ask_q(10,5)
             break
-        elif choice == "2":    
-            ask_q(20,9)
+        elif choice == "2":
+            ask_q(20,10)
             break
         elif choice == "3":
-            ask_q(50,14)
+            ask_q(50,15)
             break
     except ValueError:
         ("Choose a Valid difficulty ")
