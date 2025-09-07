@@ -1,0 +1,51 @@
+START program
+
+Display welcome message 
+
+Loop until valid difficulty is chosen (easy, medium or hard):
+	Ask user for difficulty
+	Use parameters (max_num and numofquestion)  to set difficulty.
+
+Define create_question function
+	Set two variables to randomize numbers according to chosen difficulty
+	Make a set for the two operations ( + and -)
+	Generate random operation/ question using functions of random
+	Return randomized question
+
+Define ask_question function
+	Initialize score, question_number(i) and total time
+	Create a question log to record response
+	Loop randomized question until it reaches the final question
+		Start timer
+		Call create_question
+		Ask user input as answer
+		End timer when question is answered
+		Add recorded time to elapsed_time
+		
+		
+
+IF answer is correct
+			Add 10 points minus time taken (1 point per second) to score
+			Add 1 to question_number(i) to advance in questions
+			Display time taken and points awarded
+
+		ELSE answer is wrong
+			Add 1 to i to advance in questions
+			Add 0 to points
+			Display “incorrect answer”
+APPEND data(Question no., time taken, points awarded, correct or not) to question_log
+
+ELSE response is invalid (not a number) 
+	Add 1 to i to advance in questions
+	Add 0 to points
+Display final challenge question
+	IF user answer is correct grant 20 points
+ELSE grant 0 points and display incorrect respone or invalid response according to user input
+
+Display final question breakdown using data from question_log
+Show performance summary 
+
+END program
+
+		
+	
